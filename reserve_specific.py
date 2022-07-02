@@ -1,4 +1,5 @@
 import datetime
+import platform
 import threading
 import time
 
@@ -154,9 +155,11 @@ if RELEASE_TIME is not None:
 class ReserveTFL():
     def __init__(self):
         options = Options()
-        # Uncomment to use Chrome Beta
         if USE_CHROME_BETA:
-            options.binary_location = "/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome Beta"
+            if platform.system() == "Darwin":
+                options.binary_location = "/Applications/Google Chrome Beta.app/Contents/MacOS/Google Chrome Beta"
+            else:
+                options.binary_location = "C:/Program Files/Google/Chrome Beta/Application/chrome.exe"
         
         options.add_argument("--incognito")
         # options.add_argument("--headless")
