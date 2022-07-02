@@ -32,13 +32,6 @@ original script and avoids potentially reserving the wrong experience
 date flexibility of the original script.
 
 
-These values are hardcoded into the url. 
-
-
-Because of this, we 
-cannot wait for page to load the calendar, and instead fallback
-on a timeout to determine if the reservations have released yet.
-
 SETTINGS
 To understand the below descriptions, please refer to this example
 URL for The French Laundry:
