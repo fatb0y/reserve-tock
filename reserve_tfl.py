@@ -1,13 +1,18 @@
 import threading
 import time
 
+import chromedriver_autoinstaller as chromedriver
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.utils import ChromeType
 
+chromedriver.install()
 # Login not required for Tock. Leave it as false to decrease reservation delay
 ENABLE_LOGIN = False
 TOCK_USERNAME = "SET_YOUR_USER_NAME_HERE"
@@ -54,18 +59,18 @@ BROWSER_CLOSE_DELAY_SEC = 600
 WEBDRIVER_TIMEOUT_DELAY_MS = 3000
 
 MONTH_NUM = {
-    'january':   1,
-    'february':  2,
-    'march':     3,
-    'april':     4,
-    'may':       5,
-    'june':      6,
-    'july':      7,
-    'august':    8,
-    'september': 9,
-    'october':   10,
-    'november':  11,
-    'december':  12
+    'january':   '01',
+    'february':  '02',
+    'march':     '03',
+    'april':     '04',
+    'may':       '05',
+    'june':      '06',
+    'july':      '07',
+    'august':    '08',
+    'september': '09',
+    'october':   '10',
+    'november':  '11',
+    'december':  '12',
 }
 
 
@@ -77,7 +82,7 @@ class ReserveTFL():
             options.add_argument('--user-data-dir={}'.format(USER_DATA_DIR))
             options.add_argument('--profile-directory=Default')
 
-        self.driver = webdriver.Chrome(options=options)
+        self.driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(),options=options)
 
     def teardown(self):
         self.driver.quit()
